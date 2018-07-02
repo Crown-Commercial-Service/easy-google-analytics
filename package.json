@@ -1,0 +1,25 @@
+{
+  "name": "easy-google-analytics",
+  "version": "1.0.0",
+  "description": "JavaScript plugin which makes Google Analytics easy to implement",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DilwoarH/easy-google-analytics.git"
+  },
+  "keywords": [
+    "google",
+    "analytics",
+    "javascript",
+    "plugin"
+  ],
+  "author": "Dilwoar Hussain",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/DilwoarH/easy-google-analytics/issues"
+  },
+  "homepage": "https://github.com/DilwoarH/easy-google-analytics#readme"
+}
