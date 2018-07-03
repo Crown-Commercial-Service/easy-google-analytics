@@ -1,7 +1,13 @@
 var PageViews = class {
 
-    constructor(visitor) {
-        
+    constructor(ga) {
+        console.info('INIT: PageViews');
+        this.ga = ga;
+        this.send();
+    }
+
+    send(path = '/') {
+        this.ga('send', 'pageview', path);
     }
 
 };

@@ -1,7 +1,8 @@
 var AutoTrackers = class {
 
-    constructor(visitor) {
-        
+    constructor(GA) {
+        console.info('INIT: AutoTracker');
+        this.GA = GA;
     }
 
 };
