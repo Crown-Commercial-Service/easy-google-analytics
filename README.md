@@ -1,7 +1,8 @@
 EasyGA Track everything, everywhere.
 ====================================
 
-EasyGA is a JavaScript layer on top of Google Analytics which automatically tracks all events, views, links and other metrics without requiring any additional javascript code to be written. Just include the library, set the tracking code and go!
+EasyGA is a JavaScript layer on top of Google Analytics which automatically tracks all events, views, links and other metrics without requiring any additional j
+JavaScript code to be written. Just include the library, set the tracking code and go!
 
 Getting started
 ---------------
