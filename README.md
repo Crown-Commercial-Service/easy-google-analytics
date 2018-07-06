@@ -62,7 +62,7 @@ Page tracking allows you to measure the number of views you had for a particular
     <div 
         data-analytics="trackPageView" 
         data-url="{virtualPageUrl}" 
-    ></div>` 
+    ></div>
         
 
 ### External links
