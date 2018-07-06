@@ -2,6 +2,7 @@
 const Events = require('./events');
 const PageViews = require('./page-views');
 const AutoTrackers = require('./auto-trackers');
+const CustomDimensions = require('./custom-dimensions');
 
 const EasyGA = class {
 
@@ -11,11 +12,11 @@ const EasyGA = class {
         };ga.l = +new Date();
         this.ga = window.ga;
         this.ga('create', GA_CODE, 'auto');
-        this.ga('send', 'pageview');
 
         this.events = new Events(this.ga);
         this.pageViews = new PageViews(this.ga);
-        this.AutoTrackers = new AutoTrackers(this.ga);
+        this.customDimensions = new CustomDimensions(this.ga);
+        this.autoTrackers = new AutoTrackers(this);
         this.init();
     }
 
@@ -31,12 +32,84 @@ if (window) {
     window.EasyGA = EasyGA;
 }
 
-},{"./auto-trackers":2,"./events":3,"./page-views":4}],2:[function(require,module,exports){
+},{"./auto-trackers":2,"./custom-dimensions":3,"./events":4,"./page-views":5}],2:[function(require,module,exports){
 var AutoTrackers = class {
 
-    constructor(GA) {
+    constructor(EasyGA) {
         console.info('INIT: AutoTracker');
-        this.GA = GA;
+        this.EasyGA = EasyGA;
+        this.trackPageView();
+        this.trackExternalLinks();
+        this.setCustomDimensions();
+        this.trackEvents();
+        this.trackVirtualPageViews();
+    }
+
+    trackPageView() {
+        this.EasyGA.pageViews.send();
+    }
+
+    trackExternalLinks() {
+        var _this = this;
+        $('a').filter(function () {
+            return this.hostname && this.hostname !== window.location.hostname;
+        }).on('click', function (e) {
+            var $target = $(e.target);
+            var category = 'external-link-all';
+            var action = $target.text();
+            var label = $target.attr('href');
+            _this.EasyGA.events.send(category, action, label);
+        });
+    }
+
+    setCustomDimensions() {
+        var _this = this;
+        $('meta[name="ga_customDimension"]').each(function (index, customDimension) {
+            var dimensionId = $(customDimension).attr('data-id');
+            var dimensionValue = $(customDimension).attr('data-value');
+            if (dimensionId && dimensionValue) {
+                _this.EasyGA.ga.customDimensions.set(dimensionId, dimensionValue);
+            }
+        });
+    }
+
+    trackEvents() {
+        var _this = this;
+        $('body').on('click', '[data-analytics=trackEvent]', function (e) {
+            var $target = $(e.target);
+            var category = $target.attr('data-analytics-category');
+            var action = $target.attr('data-analytics-action');
+            var label = $target.attr('data-analytics-label');
+
+            // if data-analytics-target-selector is set
+            // then get the value of the target
+            // selector needs to be a CSS selector
+            // eg. ".className", "#id", "input[name=NameOfRadio]:checked"
+            var selector = $target.attr('data-analytics-target-selector');
+
+            if (selector) {
+                label = $(selector).val();
+            }
+
+            // if no label is set then use the text of target
+            // if no text available then use the href of target
+            var href = $target.attr('href');
+            var text = $target.text();
+            if (!label && text) label = text;else if (!label && !text && href) label = href;
+
+            _this.EasyGA.events.send(category, action, label);
+        });
+    }
+
+    trackVirtualPageViews() {
+        var _this = this;
+        $('[data-analytics=trackPageView]').each(function (e) {
+            var $target = $(e.target);
+            var url = $target.attr('data-url');
+            if (url) {
+                _this.pageViews.send(url);
+            }
+        });
     }
 
 };
@@ -44,6 +117,22 @@ var AutoTrackers = class {
 module.exports = AutoTrackers;
 
 },{}],3:[function(require,module,exports){
+var CustomDimensions = class {
+
+    constructor(ga) {
+        console.info('INIT: CustomDimensions');
+        this.ga = ga;
+    }
+
+    set(dimensionId, dimensionValue) {
+        this.ga('set', dimensionId, dimensionValue);
+    }
+
+};
+
+module.exports = CustomDimensions;
+
+},{}],4:[function(require,module,exports){
 var Events = class {
 
     constructor(ga) {
@@ -65,16 +154,15 @@ var Events = class {
 
 module.exports = Events;
 
-},{}],4:[function(require,module,exports){
+},{}],5:[function(require,module,exports){
 var PageViews = class {
 
     constructor(ga) {
         console.info('INIT: PageViews');
         this.ga = ga;
-        this.send();
     }
 
-    send(path = '/') {
+    send(path = window.location.pathname) {
         this.ga('send', 'pageview', path);
     }
 

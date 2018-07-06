@@ -3,10 +3,9 @@ var PageViews = class {
     constructor(ga) {
         console.info('INIT: PageViews');
         this.ga = ga;
-        this.send();
     }
 
-    send(path = '/') {
+    send(path = window.location.pathname) {
         this.ga('send', 'pageview', path);
     }
 
