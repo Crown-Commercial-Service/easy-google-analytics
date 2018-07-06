@@ -1,7 +1,7 @@
 EasyGA Track everything, everywhere.
 ====================================
 
-EasyGA is a Google Analytics JS extension which automatically tracks all events, views and other analytics without requiring any additional code to be written. Just include the library, set the tracking code and go!
+EasyGA is a JavaScript layer on top of Google Analytics which automatically tracks all events, views, links and other metrics without requiring any additional javascript code to be written. Just include the library, set the tracking code and go!
 
 Getting started
 ---------------
@@ -15,6 +15,10 @@ Getting started is simple, just include the following lines in your HTML file:
         window._easyGA = new EasyGA('UA-121792664-1');
     </script> 
     
+
+### Source code
+
+[https://github.com/alphagov/easy-google-analytics](https://github.com/alphagov/easy-google-analytics)
 
 Auto tracking
 -------------
@@ -42,17 +46,17 @@ Events are user interactions with content that can be tracked independently from
         data-anlaytics-action="{action}"
         data-analytics-label="{label|optional}"
         data-analytics-target-selector="{selector|optional}"
-    >Submit</button>
+    >Submit</button> 
         
 
 ### Custom Dimenions
 
 Custom dimensions and metrics are a powerful way to send custom data to Google Analytics. Web developers can use custom dimensions and metrics to segment and measure differences between logged in and logged out users, authors of pages, levels in games, or any other business data you have on a page.
 
-      <meta 
+    <meta 
         data-analytics="customDimension" 
         data-id="{dimensionId}"
-        data-value="{dimensionValue}">
+        data-value="{dimensionValue}"> 
         
 
 ### Virtual page views
@@ -62,7 +66,7 @@ Page tracking allows you to measure the number of views you had for a particular
     <div 
         data-analytics="trackPageView" 
         data-url="{virtualPageUrl}" 
-    ></div>
+    ></div> 
         
 
 ### External links
