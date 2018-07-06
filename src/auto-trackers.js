@@ -29,7 +29,7 @@ var AutoTrackers = class {
 
     setCustomDimensions() {
         var _this = this;
-        $('meta[name="ga_customDimension"]').each(function(index, customDimension){
+        $('meta[data-analytics="customDimension"]').each(function(index, customDimension){
             var dimensionId = $(customDimension).attr('data-id');
             var dimensionValue = $(customDimension).attr('data-value');
             if ( dimensionId && dimensionValue ) {

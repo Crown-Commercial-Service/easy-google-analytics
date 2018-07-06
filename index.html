@@ -123,6 +123,17 @@ document.body.className = ((document.body.className) ? document.body.className +
             Downloads, mobile ad clicks, gadgets, Flash elements, AJAX embedded elements, and video plays are all examples 
             of actions you might want to track as Events.
         </p>
+        <pre>
+        <code>
+    &#x3C;button type=&#x22;submit&#x22; 
+        data-analytics=&#x22;trackEvents&#x22; 
+        data-analytics-category=&#x22;{category}&#x22;
+        data-anlaytics-action=&#x22;{action}&#x22;
+        data-analytics-label=&#x22;{label|optional}&#x22;
+        data-analytics-target-selector=&#x22;{selector|optional}&#x22;
+    &#x3E;Submit&#x3C;/button&#x3E;
+        </code>
+        </pre>
     </section>
 
     <section>
@@ -135,6 +146,15 @@ document.body.className = ((document.body.className) ? document.body.className +
             Web developers can use custom dimensions and metrics to segment and measure differences between logged in and logged out users, 
             authors of pages, levels in games, or any other business data you have on a page.
         </p>
+
+        <pre>
+        <code>
+    &#x3C;meta 
+        data-analytics=&#x22;customDimension&#x22; 
+        data-id=&#x22;{dimensionId}&#x22;
+        data-value=&#x22;{dimensionValue}&#x22;&#x3E;
+        </code>
+        </pre>
     </section>
 
     <section>
