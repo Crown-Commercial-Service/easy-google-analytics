@@ -1,3 +1,7 @@
+# Retired and unmaintained
+
+Nobody is using this project, so we have decided to retire it. Do not use - it is unmaintained and has many dependencies with known vulnerabilities.
+
 # EasyGA Track everything, everywhere.
 
 EasyGA is a JavaScript layer on top of Google Analytics which automatically tracks all events, views, links and other metrics without requiring any additional JavaScript code to be written. Just include the library, set the tracking code and go!
